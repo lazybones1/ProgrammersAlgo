@@ -1,0 +1,76 @@
+class Solution {
+    public String solution(String new_id) {
+        String answer = "";
+        answer=step1(new_id);
+        answer=step2(answer);
+        answer=step3(answer);
+        answer=step4(answer);
+        answer=step5(answer);
+        answer=step6(answer);
+        answer=step7(answer);
+        return answer;
+    }
+    public String step1(String id){
+        String st1 = id.toLowerCase();
+        return st1;
+    }
+    public String step2(String id){
+        String st2 = id;
+        for(int i = 0; i<128; i++){
+            if((i>=48 && i<=57) || (i>=97 && i<=122) || i==45 || i == 46 || i== 95){
+                
+            }
+            else{
+                st2 = st2.replace(Character.toString((char)i), "");
+            }
+        }
+        return st2;
+    }
+    public String step3(String id){
+        String st3 = id;
+        st3 = st3.replaceAll("[.]+", ".");
+        return st3;
+    }
+    public String step4(String id){
+        String st4=id;
+        if(st4.length() == 0){
+            return st4;
+        }
+        
+        if(st4.charAt(0) == '.'){
+            if(st4.length()==1){
+                return "";
+            }
+            st4 = st4.substring(1,st4.length());
+        }
+        if(st4.charAt(st4.length()-1) == '.'){
+            st4 = st4.substring(0,st4.length()-1);
+        }
+        return st4;
+    }
+    public String step5(String id){
+        String st5 = id;
+        if(st5.equals("")){
+            st5 = "a";
+        }
+        return st5;
+    }
+    public String step6(String id){
+        String st6 = id;
+        if(st6.length()>15){
+            st6 = st6.substring(0,15);
+            st6 = step4(st6);
+        }        
+        return st6;
+    }
+    public String step7(String id){
+        String st7 = id;
+        if(st7.length()<3){
+            char c = st7.charAt(st7.length()-1);
+            while(st7.length()<3){
+                st7 = st7 + Character.toString(c);
+            }
+        }
+        return st7;
+    }
+}
