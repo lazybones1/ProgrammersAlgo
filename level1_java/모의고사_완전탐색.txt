@@ -1,0 +1,53 @@
+import java.util.*;
+class Solution {
+    int[] mathGiveupAnswer1 = {1,2,3,4,5};
+    int[] mathGiveupAnswer2 = {2,1,2,3,2,4,2,5};
+    int[] mathGiveupAnswer3 = {3,3,1,1,2,2,4,4,5,5};
+    int[] checkResult = {0,0,0};    
+    
+    public int[] solution(int[] answers) {
+        int[] answer;
+        List<Integer> ans = new ArrayList<>();        
+        
+        for(int i = 0; i< answers.length; i++){
+            if(check(mathGiveupAnswer1, i, answers[i]))
+                checkResult[0]++;
+            if(check(mathGiveupAnswer2, i, answers[i]))
+                checkResult[1]++;
+            if(check(mathGiveupAnswer3, i, answers[i]))
+                checkResult[2]++;
+        }
+        
+        int max = 0;
+        int len = 0;
+        for(int i = 0; i<checkResult.length; i++){
+            if(checkResult[i] > max)
+                max = checkResult[i];
+            if(checkResult[i] == max)
+                len++;
+        }
+        
+        for(int i = 0; i<checkResult.length; i++){
+            if(checkResult[i] == max)
+                ans.add(i+1);
+        }
+        
+        answer = new int[ans.size()];
+        int size=0;
+        for(int temp : ans){
+            answer[size++] = temp;
+        }
+        
+        return answer;
+    }
+   
+    private boolean check(int[] answerSheet, int index, int ans){
+        if(index > answerSheet.length -1){
+            index %= answerSheet.length;
+        }
+        if(answerSheet[index] == ans){
+            return true;
+        }
+        return false;
+    }         
+}
